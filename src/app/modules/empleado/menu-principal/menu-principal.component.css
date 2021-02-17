@@ -1,0 +1,15 @@
+.container-fluid
+{
+    padding-top: 100px;
+}
+
+.card
+{
+    text-align: center;
+}
+
+#columna
+{
+    height: 30%; 
+    width: 30%;
+}

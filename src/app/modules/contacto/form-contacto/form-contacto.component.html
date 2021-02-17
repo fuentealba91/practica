@@ -1,0 +1,76 @@
+<div class="container">
+    <h1>Formulario de Contacto</h1>
+    <form method="POST" action="">
+        <div class="form-row">
+            <div class="form-group col-sm-6">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre" autocomplete="off" [(ngModel)]="cont.nombre" required>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" class="form-control" placeholder="Apellido" autocomplete="off" [(ngModel)]="cont.apellido" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-4">
+                <label for="comuna">Comuna</label>
+                <input type="text" name="comuna" class="form-control" autocomplete="off" [(ngModel)]="cont.comuna" required>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="correo">Correo</label>
+                <input type="email" name="correo" class="form-control" placeholder="correo@correo.com" autocomplete="off" [(ngModel)]="cont.correo" required>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="fono">Teléfono (Opcional)</label>
+                <input type="text" name="fono" id="fono" class="form-control" placeholder="XXXXXXXXX" maxlength="9" autocomplete="off" [(ngModel)]="cont.fono">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-6">
+                <label for="empresa">Empresa</label>
+                <input type="text" name="empresa" class="form-control" placeholder="" autocomplete="off" [(ngModel)]="cont.empresa" required>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="cargo">Cargo</label>
+                <input type="text" name="cargo" class="form-control" placeholder="" autocomplete="off" [(ngModel)]="cont.cargo">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12">
+                <label for="categoria">Categoría</label>
+                <select name="categoria" class="form-select" [(ngModel)]="cont.categoria">
+                    <option value="Cliente">Cliente</option>
+                    <option value="Proveedor">Proveedor</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row" *ngIf="cont.categoria=='Proveedor'">
+            <div class="form-group col-sm-6">
+                <label for="productos">Productos</label>
+                <select name="productos" class="form-select" [(ngModel)]="cont.producto">
+                    <option value="">Escoger</option>
+                    <option value="{{catProductos.categoria}}" *ngFor="let catProductos of cat">{{catProductos.categoria}}</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-6" id="documento">
+                <label for="archivo">Catálogo</label>
+                <input type="file" name="archivo" class="form-control" id="archi" accept=".pdf, .doc, .docx" (change)="seleccionarArchivo($event)"/>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12">
+                <label for="mensaje">Mensaje</label>
+                <textarea class="form-control" name='mensaje' id="mensaje" rows="3" autocomplete="off" [(ngModel)]="cont.mensaje" [ngModelOptions]="{standalone: true}"></textarea>
+              </div>
+        </div>
+            <div class="form-group col-sm-12 text-center">
+                <button type="submit" class="btn" (click)="Enviar()">Enviar</button>
+            </div>
+    </form>
+</div>
+
+<mat-form-field class="example-form-field">
+    <mat-label>Clearable input</mat-label>
+    <input matInput type="text" autocomplete="off">
+  </mat-form-field>
+  

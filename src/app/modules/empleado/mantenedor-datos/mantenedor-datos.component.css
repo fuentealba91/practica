@@ -1,0 +1,29 @@
+.container-fluid
+{
+    padding-top: 100px;
+}
+
+.card
+{
+    text-align: center;
+    height: 400px;
+    width: 400px
+}
+
+#columna
+{
+    height: 30%; 
+    width: 30%;
+    text-align: center;
+}
+
+i
+{
+    cursor: pointer;
+}
+
+img
+{
+    height: 400px;
+    width: 400px;
+}

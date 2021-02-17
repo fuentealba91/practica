@@ -1,0 +1,26 @@
+.container-fluid
+{
+    text-align: center;
+    padding-top: 76px;
+}
+
+#cuadro1, #cuadro2, #cuadro3
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 250px;
+    text-align: center;
+}
+
+.frases
+{
+    margin-top: 40%;
+}
+
+#cuadro1:hover, #cuadro2:hover, #cuadro3:hover
+{
+    transform: scale(0.9);
+    cursor: pointer;
+    transition: all .8s;
+}

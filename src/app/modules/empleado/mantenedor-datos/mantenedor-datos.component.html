@@ -1,0 +1,677 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2 mx-auto" id="columna">
+            <a (click)="detalleRegion()">
+                <div class="card" id="card-izq">
+                    <img src="../../../../assets/region.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Regiones</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-2 mx-auto" id="columna">
+            <a (click)="detalleComuna()">
+                <div class="card" id="card-der">
+                    <img src="../../../../assets/ciudad.jpg">
+                    <div class="card-body">
+                        <h5 class="card-title">Comunas</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-2 mx-auto" id="columna">
+            <a (click)="detalleProducto()">
+                <div class="card" id="card-izq">
+                    <img src="../../../../assets/mercado.jpg">
+                    <div class="card-body">
+                        <h5 class="card-title">Productos</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <br>
+        <div class="col-sm-2 mx-auto" id="columna">
+            <a (click)="detalleCargo()">
+                <div class="card" id="card-izq">
+                    <img src="../../../../assets/cargos.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Cargos</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-2 mx-auto" id="columna">
+            <a (click)="detallePersona()">
+                <div class="card" id="card-izq">
+                    <img src="../../../../assets/mercado.jpg">
+                    <div class="card-body">
+                        <h5 class="card-title">Personas</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-2 mx-auto" id="columna">
+            <a (click)="detalleEmpleado()">
+                <div class="card" id="card-izq">
+                    <img src="../../../../assets/cargos.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Empleados</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!--MODAL REGION-->
+<div class="modal fade" id="modalRegion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" >Regiones</h2>
+            </div>
+            <div class="modal-body">
+                <div id="table" class="table-editable">
+                    <table class="table table-responsive-sm table-striped text-center">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th></th>
+                                <th><input type="text" class="form-control" name="nombre" [(ngModel)]="region.nombre"></th>
+                                <th></th>
+                                <th><button class="btn btn-success" (click)="agregarRegion()">Agregar</button></th>
+                            </tr>
+                        </thead>
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Región</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let region of reg">
+                                <td> {{ region.id               }} </td>
+                                <td contenteditable="true"> {{ region.nombre            }} </td>
+                                <td> <i class="fas fa-edit fa-lg" id="editar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalModificarRegion" (click)="detalleRegionId(region.id)"></i></td>
+                                <td> <i class="fas fa-trash fa-lg" id="eliminar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalEliminarRegion" (click)="detalleRegionId(region.id)"></i></td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL REGION-->
+
+<!--MODAL MODIFICAR REGION-->
+<div class="modal fade" id="modalModificarRegion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar Región</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="">Id</label>
+                    <input type="text" name="iden" class="form-control" id="ide" *ngFor="let region of det" value="{{region.id}}" [(ngModel)]="region.id" [ngModelOptions]="{standalone: true}" disabled>
+                    <label for="">Nombre</label>
+                    <input type="text" class="form-control" id="nom" *ngFor="let region of det" value="{{region.nombre}}" [(ngModel)]="region.nombre" [ngModelOptions]="{standalone: true}" autocomplete="off">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="modificarRegion()">Modificar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL MODIFICAR REGION-->
+
+<!--MODAL ELIMINAR REGION-->
+<div class="modal fade" id="modalEliminarRegion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Eliminar Región</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5 *ngFor="let region of det">¿Está seguro de eliminar a {{region.nombre}}?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="btnEliminar" *ngFor="let region of det" data-bs-dismiss="modal" (click)="eliminarRegion(region.id)">Eliminar</button>
+          <button type="button" class="btn btn-secondary" id="btnCerrar" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--MODAL ELIMINAR REGION-->
+
+<!--MODAL COMUNA-->
+<div class="modal fade" id="modalComuna" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" >Comunas</h2>
+            </div>
+            <div class="modal-body">
+                <div id="table" class="table-editable">
+                    <table class="table table-responsive-sm table-striped text-center">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th></th>
+                                <th>
+                                    <select class="form-select" [(ngModel)]="comuna.region">
+                                        <option *ngFor="let region of reg" value="{{region.nombre}}">{{region.nombre}}</option>
+                                    </select>
+                                </th>
+                                <th><input type="text" class="form-control" name="nombre" [(ngModel)]="comuna.nombre" autocomplete="off"></th>
+                                <th></th>
+                                <th><button class="btn btn-success" (click)="agregarComuna()">Agregar</button></th>
+                            </tr>
+                        </thead>
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Región</th>
+                                <th>Comuna</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let comuna of com">
+                                <td> {{ comuna.id               }} </td>
+                                <td> {{ comuna.region           }} </td>
+                                <td> {{ comuna.nombre           }} </td>
+                                <td> <i class="fas fa-edit fa-lg" id="editar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalModificarComuna" (click)="detalleComunaId(comuna.id)"></i></td>
+                                <td> <i class="fas fa-trash fa-lg" id="eliminar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalEliminarComuna" (click)="detalleComunaId(comuna.id)"></i></td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL COMUNA-->
+
+<!--MODAL MODIFICAR COMUNA-->
+<div class="modal fade" id="modalModificarComuna" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar Comuna</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="">Id</label>
+                    <input type="text" name="iden" class="form-control" id="iden" *ngFor="let comuna of det" value="{{comuna.id}}" [(ngModel)]="comuna.id" [ngModelOptions]="{standalone: true}" disabled>
+                    <label for="">Región</label>
+                    <input type="text" name="regi" class="form-control" *ngFor="let comuna of det" value="{{comuna.region}}"  disabled>
+                    <label for="">Región a Cambiar</label>
+                    <select class="form-select" id="regi" [(ngModel)]="comuna.region" [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let region of reg" value="{{region.nombre}}">{{region.nombre}}</option>
+                    </select>
+                    <label for="">Nombre</label>
+                    <input type="text" class="form-control" id="nomb" *ngFor="let comuna of det" value="{{comuna.nombre}}" [(ngModel)]="comuna.nombre" [ngModelOptions]="{standalone: true}" autocomplete="off">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="modificarComuna()">Modificar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL MODIFICAR COMUNA-->
+
+<!--MODAL ELIMINAR COMUNA-->
+<div class="modal fade" id="modalEliminarComuna" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Eliminar Comuna</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5 *ngFor="let comuna of det">¿Está seguro de eliminar a {{comuna.nombre}}?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="btnEliminar" *ngFor="let comuna of det" data-bs-dismiss="modal" (click)="eliminarComuna(comuna.id)">Eliminar</button>
+          <button type="button" class="btn btn-secondary" id="btnCerrar" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--MODAL ELIMINAR COMUNA-->
+
+<!--MODAL PRODUCTO-->
+<div class="modal fade" id="modalProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" >Productos</h2>
+            </div>
+            <div class="modal-body">
+                <div id="table" class="table-editable">
+                    <table class="table table-responsive-sm table-striped text-center">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Categoria</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+                                <td><input type="text" class="form-control" name="nombre" [(ngModel)]="producto.categoria" autocomplete="off"></td>
+                                <td></td>
+                                <td><button class="btn btn-success" (click)="agregarProducto()">Agregar</button></td>
+                            </tr>
+                            <tr *ngFor="let producto of pro">
+                                <td> {{ producto.id               }} </td>
+                                <td> {{ producto.categoria        }} </td>
+                                <td> <i class="fas fa-edit fa-lg" id="editar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalModificarProducto" (click)="detalleProductoId(producto.id)"></i></td>
+                                <td> <i class="fas fa-trash fa-lg" id="eliminar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalEliminarProducto" (click)="detalleProductoId(producto.id)"></i></td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL PRODUCTO-->
+
+<!--MODAL MODIFICAR PRODUCTO-->
+<div class="modal fade" id="modalModificarProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="">Id</label>
+                    <input type="text" name="iden" class="form-control" id="id" *ngFor="let producto of det" value="{{producto.id}}" [(ngModel)]="producto.id" [ngModelOptions]="{standalone: true}" disabled>
+                    <label for="">Nombre</label>
+                    <input type="text" class="form-control" id="no" *ngFor="let producto of det" value="{{producto.categoria}}" [(ngModel)]="producto.categoria" [ngModelOptions]="{standalone: true}" autocomplete="off">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="modificarProducto()">Modificar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL MODIFICAR PRODCUTO-->
+
+<!--MODAL ELIMINAR PRODUCTO-->
+<div class="modal fade" id="modalEliminarProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Eliminar Producto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5 *ngFor="let producto of det">¿Está seguro de eliminar a {{producto.categoria}}?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="btnEliminar" *ngFor="let producto of det" data-bs-dismiss="modal" (click)="eliminarProducto(producto.id)">Eliminar</button>
+          <button type="button" class="btn btn-secondary" id="btnCerrar" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--MODAL ELIMINAR PRODUCTO-->
+
+<!--MODAL CARGO-->
+<div class="modal fade" id="modalCargo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" >Cargos</h2>
+            </div>
+            <div class="modal-body">
+                <div id="table" class="table-editable">
+                    <table class="table table-responsive-sm table-striped text-center">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Puesto</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+                                <td><input type="text" class="form-control" name="nombre" [(ngModel)]="cargo.puesto" autocomplete="off"></td>
+                                <td></td>
+                                <td><button class="btn btn-success" (click)="agregarCargo()">Agregar</button></td>
+                            </tr>
+                            <tr *ngFor="let cargo of car">
+                                <td> {{ cargo.id               }} </td>
+                                <td> {{ cargo.puesto           }} </td>
+                                <td> <i class="fas fa-edit fa-lg" id="editar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalModificarCargo" (click)="detalleCargoId(cargo.id)"></i></td>
+                                <td> <i class="fas fa-trash fa-lg" id="eliminar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalEliminarCargo" (click)="detalleCargoId(cargo.id)"></i></td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL CARGO-->
+
+<!--MODAL MODIFICAR CARGO-->
+<div class="modal fade" id="modalModificarCargo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="">Id</label>
+                    <input type="text" name="iden" class="form-control" id="ident" *ngFor="let cargo of det" value="{{cargo.id}}" [(ngModel)]="cargo.id" [ngModelOptions]="{standalone: true}" disabled>
+                    <label for="">Nombre</label>
+                    <input type="text" class="form-control" id="nombr" *ngFor="let cargo of det" value="{{cargo.puesto}}" [(ngModel)]="cargo.puesto" [ngModelOptions]="{standalone: true}" autocomplete="off">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="modificarCargo()">Modificar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL MODIFICAR CARGO-->
+
+<!--MODAL ELIMINAR CARGO-->
+<div class="modal fade" id="modalEliminarCargo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Eliminar Cargo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5 *ngFor="let cargo of det">¿Está seguro de eliminar a {{cargo.puesto}}?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="btnEliminar" *ngFor="let cargo of det" data-bs-dismiss="modal" (click)="eliminarCargo(cargo.id)">Eliminar</button>
+          <button type="button" class="btn btn-secondary" id="btnCerrar" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--MODAL ELIMINAR CARGO-->
+
+<!--MODAL PERSONA-->
+<div class="modal fade" id="modalPersona" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" >Empleados</h2>
+            </div>
+            <div class="modal-body">
+                <div id="table" class="table-editable table-responsive">
+                    <table class="table table-responsive-sm table-striped text-center">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Correo</th>
+                                <th>Telefono</th>
+                                <th>Mensaje</th>
+                                <th>Fecha</th>
+                                <th>Comuna</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+                                <td><input type="text" class="form-control" name="nombre" [(ngModel)]="persona.nombre" autocomplete="off"></td>
+                                <td><input type="text" class="form-control" name="apellido" [(ngModel)]="persona.apellido" autocomplete="off"></td>
+                                <td><input type="mail" class="form-control" name="correo" [(ngModel)]="persona.correo" autocomplete="off"></td>
+                                <td><input type="text" class="form-control" name="telefono" [(ngModel)]="persona.telefono" autocomplete="off"></td>
+                                <td><input type="text" class="form-control" name="mensaje" [(ngModel)]="persona.mensaje" autocomplete="off"></td>
+                                <td><input type="text" class="form-control" name="fecha" [(ngModel)]="persona.fecha" autocomplete="off"></td>
+                                <td>
+                                    <select class="form-select" [(ngModel)]="persona.comuna">
+                                        <option *ngFor="let comuna of com" value="{{comuna.nombre}}">{{comuna.nombre}}</option>
+                                    </select>
+                                </td>
+                                <td><button class="btn btn-success" (click)="agregarPersona()">Agregar</button></td>
+                            </tr>
+                            <tr *ngFor="let persona of per">
+                                <td> {{ persona.id               }} </td>
+                                <td> {{ persona.nombre           }} </td>
+                                <td> {{ persona.apellido         }} </td>
+                                <td> {{ persona.correo           }} </td>
+                                <td> {{ persona.telefono         }} </td>
+                                <td> {{ persona.mensaje          }} </td>
+                                <td> {{ persona.fecha            }} </td>
+                                <td> {{ persona.comuna           }} </td>
+                                <td> 
+                                    <i class="fas fa-edit fa-lg" id="editar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalModificarPersona" (click)="detallePersonaId(persona.id)"></i>
+                                    <i class="fas fa-trash fa-lg" id="eliminar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalEliminarPersona" (click)="detallePersonaId(persona.id)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL PERSONA-->
+
+<!--MODAL MODIFICAR PERSONA-->
+<div class="modal fade" id="modalModificarPersona" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar Persona</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="">Id</label>
+                    <input type="text" name="iden" class="form-control" id="identi" *ngFor="let persona of det" value="{{persona.id}}" [(ngModel)]="persona.id" [ngModelOptions]="{standalone: true}" disabled>
+                    <label for="">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" *ngFor="let persona of det" value="{{persona.nombre}}" [(ngModel)]="persona.nombre" [ngModelOptions]="{standalone: true}" autocomplete="off">
+                    <label for="">Apellido</label>
+                    <input type="text" class="form-control" id="ape" *ngFor="let persona of det" value="{{persona.apellido}}" [(ngModel)]="persona.apellido" [ngModelOptions]="{standalone: true}" autocomplete="off">
+                    <label for="">Correo</label>
+                    <input type="text" class="form-control" id="cor" *ngFor="let persona of det" value="{{persona.correo}}" [(ngModel)]="persona.correo" [ngModelOptions]="{standalone: true}" autocomplete="off">
+                    <label for="">Telefono</label>
+                    <input type="text" class="form-control" id="tel" *ngFor="let persona of det" value="{{persona.telefono}}" [(ngModel)]="persona.telefono" [ngModelOptions]="{standalone: true}" autocomplete="off">
+                    <label for="">Mensaje</label>
+                    <input type="text" class="form-control" id="men" *ngFor="let persona of det" value="{{persona.mensaje}}" [(ngModel)]="persona.mensaje" [ngModelOptions]="{standalone: true}" autocomplete="off" disabled>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="">Comuna Actual</label>
+                            <input type="text" class="form-control" id="comu" *ngFor="let persona of det" value="{{persona.comuna}}" autocomplete="off" disabled>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="">Comuna Nueva</label>
+                            <select class="form-select" id="comun" [(ngModel)]="persona.comuna" [ngModelOptions]="{standalone: true}">
+                                <option *ngFor="let comuna of com" value="{{comuna.nombre}}">{{comuna.nombre}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="modificarPersona()">Modificar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL MODIFICAR PERSONA-->
+
+<!--MODAL ELIMINAR PERSONA-->
+<div class="modal fade" id="modalEliminarPersona" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Eliminar Persona</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5 *ngFor="let persona of det">¿Está seguro de eliminar a {{persona.nombre}} {{persona.apellido}}?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="btnEliminar" *ngFor="let persona of det" data-bs-dismiss="modal" (click)="eliminarPersona(persona.id)">Eliminar</button>
+          <button type="button" class="btn btn-secondary" id="btnCerrar" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--MODAL ELIMINAR PERSONA-->
+
+<!--MODAL EMPLEADO-->
+<div class="modal fade" id="modalEmpleado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" >Empleados</h2>
+            </div>
+            <div class="modal-body">
+                <div id="table" class="table-editable table-responsive">
+                    <table class="table table-responsive-sm table-striped text-center">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Correo</th>
+                                <th>Usuario</th>
+                                <th>Clave</th>
+                                <th>Perfil</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <select class="form-select" [(ngModel)]="trabajador.correo">
+                                        <option *ngFor="let persona of per" value="{{persona.correo}}">{{persona.correo}}</option>
+                                    </select>
+                                </td>
+                                <td><input type="text" class="form-control" name="usuario" [(ngModel)]="trabajador.usuario" autocomplete="off"></td>
+                                <td><input type="text" class="form-control" name="clave" [(ngModel)]="trabajador.clave" autocomplete="off"></td>
+                                <td><input type="text" class="form-control" name="perfil" [(ngModel)]="trabajador.perfil" autocomplete="off"></td>
+                                <td><button class="btn btn-success" (click)="agregarTrabajador()">Agregar</button></td>
+                            </tr>
+                            <tr *ngFor="let trabajador of emp">
+                                <td> {{ trabajador.id               }} </td>
+                                <td> {{ trabajador.nombre           }} </td>
+                                <td> {{ trabajador.apellido         }} </td>
+                                <td> {{ trabajador.correo           }} </td>
+                                <td> {{ trabajador.usuario          }} </td>
+                                <td> {{ trabajador.clave            }} </td>
+                                <td> {{ trabajador.perfil           }} </td>
+                                <td> 
+                                    <i class="fas fa-edit fa-lg" id="editar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalModificarEmpleado" (click)="detalleEmpleadoId(trabajador.id)"></i>
+                                    <i class="fas fa-trash fa-lg" id="eliminar" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalEliminarEmpleado" (click)="detalleEmpleadoId(trabajador.id)"></i>
+                                </td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL EMPLEADO-->
+
+<!--MODAL MODIFICAR EMPLEADO-->
+<div class="modal fade" id="modalModificarEmpleado" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar Empleado</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="">Id</label>
+                    <input type="text" name="id" class="form-control" id="id1" *ngFor="let trabajador of det" value="{{trabajador.id}}" [(ngModel)]="trabajador.id" [ngModelOptions]="{standalone: true}" disabled>
+                    <label for="">Correo</label>
+                    <input type="text" name="correo" class="form-control" id="corr" *ngFor="let trabajador of det" value="{{trabajador.correo}}" [(ngModel)]="trabajador.correo" [ngModelOptions]="{standalone: true}" disabled>
+                    <label for="">Usuario</label>
+                    <input type="text" name="user" class="form-control" id="us" *ngFor="let trabajador of det" value="{{trabajador.usuario}}" [(ngModel)]="trabajador.usuario" [ngModelOptions]="{standalone: true}" autocomplete="off">
+                    <label for="">Contraseña</label>
+                    <input type="text" name="pass" class="form-control" id="cl" *ngFor="let trabajador of det" value="{{trabajador.clave}}" [(ngModel)]="trabajador.clave" [ngModelOptions]="{standalone: true}" autocomplete="off">
+                    <label for="">Perfil</label>
+                    <input type="text" name="perfil" class="form-control" id="perf" *ngFor="let trabajador of det" value="{{trabajador.perfil}}" [(ngModel)]="trabajador.perfil" [ngModelOptions]="{standalone: true}">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="modificarEmpleado()">Modificar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL MODIFICAR EMPLEADO-->
+
+<!--MODAL ELIMINAR EMPLEADO-->
+<div class="modal fade" id="modalEliminarEmpleado" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Eliminar Empleado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5 *ngFor="let empleado of det">¿Está seguro de eliminar a {{empleado.usuario}}?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="btnEliminar" *ngFor="let empleado of det" data-bs-dismiss="modal" (click)="eliminarEmpleado(empleado.id)">Eliminar</button>
+          <button type="button" class="btn btn-secondary" id="btnCerrar" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--MODAL ELIMINAR EMPLEADO-->

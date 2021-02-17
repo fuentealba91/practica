@@ -1,0 +1,16 @@
+#tabla
+{
+    text-align: center;
+}
+
+.btn
+{
+    border-color:green;
+    color:green;
+}
+
+.btn:hover
+{
+    background-color: green;
+    color:white;
+}

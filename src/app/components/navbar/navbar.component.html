@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg" id="menu">
+    <a class="navbar-brand" [routerLink]="['/inicio']">
+        <img src="../../../assets/logo_comalim.png" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" style="color: white;" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" style="color: white;" [routerLink]="['/inicio']">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" id="navNosotros" style="color: white;" href="#" data-bs-toggle="dropdown">Nosotros  <i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-menu" id="dropNosotros" aria-labelledby="navNosotros">
+                    <li class="dropdown-item"><a id="sublink" [routerLink]="['/quienes-somos']">Quienes somos</a></li>
+                    <li class="dropdown-item"><a id="sublink" [routerLink]="['/nuestra-historia']">Nuestra historia</a></li>
+                    <li class="dropdown-item"><a id="sublink" [routerLink]="['/hace-especiales']">Que nos hace especiales</a></li>
+                    <li class="dropdown-item"><a id="sublink">Lo que más nos importa</a></li>
+                    <li class="dropdown-item"><a id="sublink">El secreto de nuestras recetas</a></li>
+                    <li class="dropdown-item"><a id="sublink" [routerLink]="['/quienes-avalan']">Quienes nos avalan</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" id="navServicios" style="color: white;" href="#" data-bs-toggle="dropdown">Nuestros Servicios  <i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-menu" id="dropServicios" aria-labelledby="navServicios">
+                    <li class="dropdown-item"><a id="sublink">Tipos de servicios</a></li>
+                    <li class="dropdown-item"><a id="sublink" [routerLink]="['/tipos-clientes']">Tipos de clientes</a></li>
+                    <li class="dropdown-item"><a id="sublink" [routerLink]="['/que-hacemos']">¿Qué hacemos?</a></li>
+                    <li class="dropdown-item"><a id="sublink">¿Cómo lo hacemos?</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: white;" [routerLink]="['/contacto']">Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: white;" *ngIf="loginbtn" [routerLink]="['/login']">Iniciar Sesión</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: white;" *ngIf="logoutbtn" [routerLink]="['/menu-principal']">Mi Portal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: white;" *ngIf="logoutbtn" [routerLink]="['/inicio']" (click)="logout()">Salir <i class="fas fa-sign-out-alt fa-lg"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav>

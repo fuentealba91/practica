@@ -1,0 +1,99 @@
+<div class="container"> 
+    <h1>Ficha de Postulación</h1>
+    <form class="formulario" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group col-sm-6">
+                <label for="nombre">Nombres</label>
+                <input type="text" name="nombre" class="form-control" placeholder="Nombres" autocomplete="off" [(ngModel)]="pos.nombre">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="apellido">Apellidos</label>
+                <input type="text" name="apellido" class="form-control" placeholder="Apellidos" autocomplete="off" [(ngModel)]="pos.apellido">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-6">
+                <label for="correo">Correo</label>
+                <input type="email" name="correo" class="form-control" placeholder="correo@correo.com" autocomplete="off" [(ngModel)]="pos.correo">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="telefono">Teléfono</label>
+                <input type="text" id="fono" name="telefono" class="form-control" maxlength="9" placeholder="XXXXXXXXX" autocomplete="off" [(ngModel)]="pos.fono">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12">
+                <label for="comunas">Comuna</label>
+                <select name="comunas" class="form-select"  [(ngModel)]="pos.comuna">
+                    <option value="">Escoger</option>
+                    <option value="{{comunas.nombre}}" *ngFor="let comunas of com">{{comunas.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-6">
+                <label for="cargo">Cargo</label>
+                <select name="cargo" class="form-select" [(ngModel)]="pos.cargo">
+                    <option value="">Escoger</option>
+                    <option value="{{cargos.puesto}}" *ngFor="let cargos of car">{{cargos.puesto}}</option>
+                </select>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checkExperiencia" [(ngModel)]="pos.experiencia" [ngModelOptions]="{standalone: true}">
+                    <label class="form-check-label" for="checkExperiencia">Posee Experiencia</label>
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="manipulacion">¿Ha realizado curso de manipulación de alimentos?</label>
+                <select name="manipulacion" class="form-select" [(ngModel)]="pos.curso">
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-4">
+                <label for="disponibilidad">¿Tiene disponibilidad inmediata?</label>
+                <select name="disponibilidad" class="form-select" [(ngModel)]="pos.disponibilidad">
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="jornada">Indique tipo de jornada laboral</label>
+                <select name="jornada" id="jornada" class="form-select" [(ngModel)]="pos.jornada">
+                    <option value="completa" selected>Jornada Completa</option>
+                    <option value="media">Media Jornada</option>
+                    <option value="reemplazo">Reemplazos</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="sueldo">Sueldo liquido esperado</label>
+                <input type="text" id="sueldo" name="sueldo" class="form-control" placeholder="Sueldo" autocomplete="off" [(ngModel)]="pos.sueldo">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12" id="curriculum">
+                <label for="archivo">Curriculum</label>
+                <input type="file" name="archivo" class="form-control" id="archi" accept=".pdf, .doc, .docx" (change)="seleccionarArchivo($event)"/>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12">
+                <label for="mensaje">Mensaje</label>
+                <textarea class="form-control" id="mensaje" rows="3" autocomplete="off" maxlength="400" [(ngModel)]="pos.mensaje" [ngModelOptions]="{standalone: true}"></textarea>
+              </div>
+        </div>
+            <div class="form-group col-sm-12 text-center">
+                <div class="form-check">
+                    <label>
+                        <input class="form-check-input" type="checkbox" value="" id="checkTerminos">
+                        <span>
+                            He leído y acepto las 
+                            <a href="">condiciones de uso</a>
+                        </span>
+                    </label>
+                </div>
+                <button type="submit" id="boton" class="btn" (click)="Agregar()">Enviar</button>
+            </div>
+    </form>
+</div>

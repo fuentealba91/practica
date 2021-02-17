@@ -1,0 +1,113 @@
+<div class="container-fluid">
+    <form class="formulario" action="POST">
+      <div class="form-row">
+        <div class="form-group col-sm-4">
+          <label for="nombre">Nombre</label>
+          <input type="text" name="nombre" class="form-control" placeholder="Nombre" autocomplete="off" [(ngModel)]="filtrado.nombre">
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="apellido">Apellido</label>
+          <input type="text" name="apellido" class="form-control" placeholder="Nombre" autocomplete="off" [(ngModel)]="filtrado.apellido">
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="empresa">Empresa</label>
+          <input type="text" name="empresa" class="form-control" placeholder="Nombre" autocomplete="off" [(ngModel)]="filtrado.empresa">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-sm-3">
+          <label for="categoria">Categoria</label>
+          <select name="categoria" class="form-select" [(ngModel)]="filtrado.categoria">
+            <option value="">Escoger</option>
+            <option value="cliente">Cliente</option>
+            <option value="proveedor">Proveedor</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-3">
+          <label for="productos">Productos</label>
+          <select name="productos" class="form-select" [(ngModel)]="filtrado.producto">
+              <option value="">Escoger</option>
+              <option value="{{catProductos.categoria}}" *ngFor="let catProductos of cat">{{catProductos.categoria}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-sm-3">
+          <button type="submit" id="boton" class="btn" (click)="recargar()">Limpiar</button>
+        </div>
+      </div>
+    </form>
+    <br>
+  </div>
+  <div class="container-fluid" id="tabla">
+    <table class="table" id="mitabla">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Empresa</th>
+          <th scope="col">Cargo</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Más</th>
+          <th scope="col">Borrar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contacto of con |filtro: filtrado.nombre | filtroApe: filtrado.apellido | filtroEmpresa: filtrado.empresa | filtroProducto: filtrado.producto | filtroCategoria: filtrado.categoria">
+          <td> {{ contacto.id             }} </td>
+          <td> {{ contacto.fecha          }} </td>
+          <td> {{ contacto.nombre         }} </td>
+          <td> {{ contacto.apellido       }} </td>
+          <td> {{ contacto.empresa        }} </td>
+          <td> {{ contacto.cargo          }} </td>
+          <td> {{ contacto.categoria      }} </td>
+          <td> {{ contacto.producto       }} </td>
+          <td> <i class="fas fa-address-book fa-lg" id="detalles" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="detalleContacto(contacto.id)"></i></td>
+          <td> <i class="fas fa-trash fa-lg" id="eliminar" data-bs-toggle="modal" data-bs-target="#staticModalEliminar" (click)="detalleContacto(contacto.id)"></i></td> 
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--MODAL DETALLES-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel" *ngFor="let detalle of det">{{detalle.nombre}} {{detalle.apellido}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5 *ngFor="let detalle of det">Correo: {{detalle.correo}}</h5>
+        <h5 *ngFor="let detalle of det">Teléfono: {{detalle.telefono}}</h5>
+        <h5 *ngFor="let detalle of det">Catálogo: <a href="http://localhost/angularPhp/archivos/{{detalle.catalogo}}" target="_blank">{{detalle.catalogo}}</a></h5>
+        <h5 *ngFor="let detalle of det">Mensaje: {{detalle.mensaje}}</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL ELIMINAR-->
+<div class="modal fade" id="staticModalEliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5 *ngFor="let detalle of det">¿Está seguro de eliminar a {{detalle.nombre}} {{detalle.apellido}}?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" id="btnEliminar" *ngFor="let detalle of det" (click)="eliminarContacto(detalle.id)" data-bs-dismiss="modal">Eliminar</button>
+        <button type="button" class="btn" id="btnCerrar" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

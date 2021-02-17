@@ -1,0 +1,54 @@
+#detalles
+{
+    color: green;
+}
+
+#detalles:hover
+{
+    color:rgb(16, 160, 16);
+    cursor: pointer;
+}
+
+#eliminar
+{
+    color: red;
+}
+
+#eliminar:hover
+{
+    color: rgb(196, 0, 0);
+    cursor: pointer;
+}
+
+#btnCerrar, #btnBuscar
+{
+    border-color: green;
+    color: green;
+}
+
+#btnCerrar:hover, #btnBuscar:hover
+{
+    background-color: green;
+    color: white;
+}
+
+#btnEliminar
+{
+    border-color: rgba(255, 0, 0, 0.712);
+    color: rgba(255, 0, 0, 0.712);
+}
+
+#btnEliminar:hover
+{
+    background-color: red;
+    color:white;
+}
+
+@media (max-width: 1080px)
+{
+    table
+    {
+        display: block;
+        overflow-x: auto;
+    }
+}

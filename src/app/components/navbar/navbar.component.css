@@ -1,0 +1,96 @@
+#sublink
+{
+    color: white;
+    text-decoration: none;
+}
+
+.navbar.navbar-expand-lg
+{
+    background-color: rgb(127, 187, 37);
+    opacity: 1;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+}
+
+img
+{
+    width: 50px;
+    height: 50px;
+}
+
+.navbar-brand
+{
+    margin-right: auto;
+    margin-left: 100px;
+}
+
+ul
+{
+    margin-left: auto;
+    margin-right: 100px;
+}
+
+.nav-link
+{
+    display: inline-block;
+    position: relative;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.dropdown-item:hover
+{
+    background:  rgb(127, 187, 37);
+}
+
+.nav-link:after, #sublink:after
+{
+    content: "";
+    display: block;
+    margin: auto;
+    height: 2px;
+    width: 0px;
+    transition: all .5s;
+}
+.nav-link:hover:after, #sublink:hover:after
+{
+    width: 100%;
+    background: white;
+}
+
+@media (max-width: 991px)
+{
+    .navbar-nav
+    {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .navbar-brand
+    {
+        margin-right: auto;
+        margin-left: 0px;
+    }
+
+    #dropNosotros, #dropServicios
+    {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+}
+
+#dropNosotros, #dropServicios
+{
+    text-transform: uppercase;
+    background-color: rgb(127, 187, 37);
+    border: none;
+}
+
+#dropNosotros li, #dropServicios li
+{
+    margin-top: 7px;
+}

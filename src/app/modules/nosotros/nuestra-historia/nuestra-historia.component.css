@@ -1,0 +1,25 @@
+.container-fluid
+{
+    padding-top: 76px;
+}
+
+#cen
+{
+    text-align: center;
+}
+
+#cen p
+{
+    margin-top: 15%;
+}
+
+#der
+{
+    text-align: justify;
+}
+
+img
+{
+    height: 200px;
+    width: 200px;
+}

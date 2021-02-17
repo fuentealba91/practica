@@ -1,0 +1,39 @@
+.container-fluid
+{
+    padding-top: 76px;
+}
+
+#cabeza
+{
+    text-align: center;
+}
+
+#iconos
+{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#iconos h5
+{
+    margin-left: 100px;
+}
+
+img
+{
+    margin-left: 100px;
+    height: 150px;
+    width: 150px;
+}
+
+#texto
+{
+    text-align: justify;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#texto p
+{
+    margin-right: 200px;
+}
